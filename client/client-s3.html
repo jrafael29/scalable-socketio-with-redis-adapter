@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Conectado ao servidor 03</h1>
+    <hr>
+    <button id="sendMessageBtn">Enviar mensagem para servidor 03</button>
+    <script type="module">
+        import { io } from "https://cdn.socket.io/4.7.4/socket.io.esm.min.js";
+      
+        const socket = io("ws://localhost:3003", {
+            transports: ["websocket"]
+        });
+
+        document.querySelector('#sendMessageBtn').addEventListener("click", () => {
+            console.log("mensagem emitida")
+            socket.emit("message", {message: "Mensagem do servidor 3"})
+        })
+
+
+        socket.on("new-message", (data) => {
+            console.log("new message received:", data)
+        })
+
+      </script>
+</body>
+</html>

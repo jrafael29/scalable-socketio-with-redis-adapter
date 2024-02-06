@@ -1,0 +1,37 @@
+version: "3"
+
+services: 
+  ws-server-1:
+    build: .
+    ports:
+      - "3001:3000"
+    volumes:
+      - .:/app
+    environment:
+      REDIS_HOST: redis
+    depends_on:
+      - redis
+  ws-server-2:
+    build: .
+    ports:
+      - "3002:3000"
+    volumes: 
+      - .:/app
+    environment:
+      REDIS_HOST: redis
+    depends_on:
+      - redis
+  ws-server-3:
+    build: .
+    ports:
+      - "3003:3000"
+    volumes: 
+      - .:/app
+    environment:
+      REDIS_HOST: redis
+    depends_on:
+      - redis
+  redis:
+    image: redis:7.2-alpine
+    ports:
+      - "6379:6379"
